@@ -1,0 +1,167 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50px;
+            background-color: #333;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        nav ul li {
+            margin-right: 20px;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        body{
+            font-family: sans-serif;
+            background: #0e0e0e;
+            margin: 20%;
+            padding: 20%;
+        }   
+        .box{
+            width: 650px;
+            padding: 40px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            background: #191919;
+            text-align: center;
+        }
+        .box h4{
+            color: white;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+        .box h2{
+            color: white;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+        .box h2 sub{
+            color: white;
+            text-transform: lowercase;
+            font-weight: 500;
+        }
+        .box div input[type = "text"],.box input[type = "number"],.box input[type = "date"]{
+            border: 0;
+            background: none;
+            display:inline;
+            margin: 20px auto;
+            text-align: center;
+            border: 2px solid#3498db;padding: 14px 10px;
+            width: 400px;
+            outline: none;
+            color: white;
+            border-radius: 24px;
+            transition: 0.25s;
+        }
+        .box input[type = "text"]:focus{
+            width: 500px;
+            border-color: #f4bf04;
+        }
+        .box input[type = "text"]:hover{
+            border-color: #f4bf04;
+        }
+        .box input[type = "submit"]{
+            border: 0;
+            background: none;
+            display: block;
+            margin: 20px auto;
+            text-align: center;
+            border: 2px solid #3498db;
+            padding: 14px 40px;
+            outline: none;
+            color: #fff;
+            border-radius: 24px;
+            transition: 0.25s;
+            cursor: pointer;
+        }
+        .box input[type = "submit"]:hover{
+            border: 2px solid #f4bf04;
+        }
+        .box input[type = "submit"]:focus{
+            border: 2px solid #f4bf04;
+        }
+        .box textarea{
+            width: 300px;
+            border: 2px solid #3498db;
+        }
+        .box textarea:hover{
+            border: 2px solid #f4bf04;
+        }
+        .box h2:hover{
+            transform: scale(1.5);
+            color: #f4bf04;
+        }
+        .box h2 sub:hover{
+            transform: scale(1.5);
+            color: #f4bf04;
+        }
+        .box h4:hover{
+            transform: scale(1.2);
+            color: #f4bf04;
+        }
+        .box input:hover::-webkit-input-placeholder{
+            transform: scale(1.2);
+        }
+        .box input[type="submit"]:hover{
+            transform: scale(1.17);
+        }
+        .radioset label {
+            color: white;
+            font-size: 18px;
+        }
+        .radioset input[type="radio"] {
+            margin-left: 10px;
+            margin-right: 20px;
+        }
+        .radioset {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            gap: 20px;
+            justify-items: radio-type="radio";
+            text-decoration-color: antiquewhite;
+        }
+        
+    </style>
+    <title>Code Generator</title>
+</head>
+<body>
+    <form class="box" action="{% url 'process_form' %}" method="POST">
+        {% csrf_token %}
+        <h2>Q<sub>i</sub>Q</h2>
+        <h4>Code Generator you Want</h4>
+        <div>
+            <input type="text" name="query" id="query" placeholder="Enter Your Query ?">
+        </div>
+        <div name="radioset">
+            <label for="python">Python</label>
+            <input type="radio" id="python" name="language" value="python">
+            <label for="java">Java</label>
+            <input type="radio" id="java" name="language" value="java">
+            <label for="c">C</label>
+            <input type="radio" id="c" name="language" value="c">
+
+        </div>
+        <input type="submit" value="Submit">
+        <textarea style="cursor: copy;" name="output" id="output" cols="250" rows="25">{{ output|default:"" }}</textarea>
+        
+    </form>
+</body>
+</html>
+
+
