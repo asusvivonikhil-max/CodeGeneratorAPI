@@ -1,12 +1,13 @@
 
 from django.shortcuts import render
-from .nn import *
+# from .nn import *
+from .Search import *
 def process_form(request):
     if request.method == 'POST':
         s = request.POST.get('query')
         lan=request.POST.get('language')
-        output = generate(s,lan)
-
+        # output = generate(s,lan)
+        output=Search(s,lan)
         return render(request, 'new.html', {'output': output})   
     else:
         return render(request, 'new.html')

@@ -13,7 +13,27 @@ https://docs.djangoproject.com/en/6.0/ref/settings
 import os
 
 from pathlib import Path
+# settings.py
 
+from pathlib import Path
+import environ
+from django.core.exceptions import ImproperlyConfigured
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+env = environ.Env()
+environ.Env.read_env(BASE_DIR / '.env')
+
+# Django Basic Settings
+SECRET_KEY = env('SECRET_KEY')
+DEBUG = env.bool('DEBUG', default=True)
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['127.0.0.1', 'localhost'])
+
+# ================== Free AI API Key ==================
+GEMINI_API_KEY = env('GEMINI_API_KEY')
+
+if not GEMINI_API_KEY:
+    raise ImproperlyConfigured("GEMINI_API_KEY is missing in .env file")
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
